@@ -108,6 +108,8 @@ const HomePage = () => {
         );
       })}
 
+      <AdsterraBanner />
+
       {/* CTA */}
       <section className="bg-primary text-primary-foreground py-16">
         <div className="container text-center max-w-2xl">
@@ -118,8 +120,8 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
-    </>
-  );
+
+      <MobileAdsterraBanner />
 };
 
 export default HomePage;
