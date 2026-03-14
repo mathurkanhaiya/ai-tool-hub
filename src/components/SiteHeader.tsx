@@ -14,19 +14,23 @@ const SiteHeader = () => {
   ];
 
   return (
-    <header className="bg-header text-header-foreground sticky top-0 z-50">
+    <header className="bg-header text-header-foreground sticky top-0 z-50 border-b border-white/10">
       <div className="container flex items-center justify-between h-16">
 
-        <Link to="/" className="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="flex items-center gap-3 font-display text-xl font-bold tracking-tight"
+        >
           <img
             src="https://i.ibb.co/Y4GzrkLh/C921394-F-ABA8-4-C2-C-A4-C0-7321-E9-E46-BDC.png"
             alt="Viral AI Tools Logo"
-            className="h-8 w-8"
+            className="h-10 w-10 rounded-md object-contain"
           />
-          Free AI Tools Hub
+          <span>Free AI Tools Hub</span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
             <Link
@@ -39,18 +43,23 @@ const SiteHeader = () => {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden p-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
 
+      {/* Mobile Navigation */}
       {open && (
-        <nav className="md:hidden border-t border-header-foreground/10 pb-4">
+        <nav className="md:hidden border-t border-white/10 pb-4">
           {links.map((l) => (
             <Link
               key={l.to}
