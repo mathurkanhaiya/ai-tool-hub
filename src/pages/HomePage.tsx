@@ -76,7 +76,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <AdPlaceholder type="banner" />
+      <AdsterraBanner />
 
       {/* Featured Tools */}
       <section className="container py-16">
