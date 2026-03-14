@@ -5,6 +5,8 @@ import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
 import AdPlaceholder from "@/components/AdPlaceholder";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
+import AdsterraBanner from "@/components/AdsterraBanner";
+import MobileAdsterraBanner from "@/components/MobileAdsterraBanner";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
@@ -74,7 +76,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <AdPlaceholder type="banner" />
+      <AdsterraBanner />
 
       {/* Featured Tools */}
       <section className="container py-16">
@@ -106,6 +108,8 @@ const HomePage = () => {
         );
       })}
 
+      <AdsterraBanner />
+
       {/* CTA */}
       <section className="bg-primary text-primary-foreground py-16">
         <div className="container text-center max-w-2xl">
@@ -116,6 +120,8 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
+
+      <MobileAdsterraBanner />
     </>
   );
 };
