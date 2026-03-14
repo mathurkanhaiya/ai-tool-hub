@@ -122,6 +122,8 @@ const HomePage = () => {
       </section>
 
       <MobileAdsterraBanner />
+    </>
+  );
 };
 
 export default HomePage;
