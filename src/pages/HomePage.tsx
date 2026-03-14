@@ -5,6 +5,8 @@ import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
 import AdPlaceholder from "@/components/AdPlaceholder";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
+import AdsterraBanner from "@/components/AdsterraBanner";
+import MobileAdsterraBanner from "@/components/MobileAdsterraBanner";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
