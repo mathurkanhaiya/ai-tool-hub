@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import SEOHead from "@/components/SEOHead";
 
