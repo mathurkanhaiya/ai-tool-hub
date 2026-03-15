@@ -4,7 +4,10 @@ const SiteFooter = () => (
   <footer className="bg-header text-header-foreground/70 mt-16">
     <div className="container py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <div>
-        <h3 className="text-header-foreground font-bold text-lg mb-3">🤖 Free AI Tools Hub</h3>
+        <div className="flex items-center gap-2 mb-3">
+          <img src="https://i.ibb.co/Y4GzrkLh/C921394-F-ABA8-4-C2-C-A4-C0-7321-E9-E46-BDC.png" alt="Viral AI Tools Logo" className="h-8 w-8 rounded-md object-contain" />
+          <h3 className="text-header-foreground font-bold text-lg">Free AI Tools Hub</h3>
+        </div>
         <p className="text-sm leading-relaxed">100+ free AI tools for creators, marketers, and YouTubers. No signup required.</p>
       </div>
       <div>
