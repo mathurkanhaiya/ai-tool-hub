@@ -77,48 +77,37 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Ad #1: 728x90 below hero (desktop) / 300x250 on mobile */}
+      {/* Ad #1: 728x90 below hero */}
       <AdsterraBanner728 />
       <div className="md:hidden">
         <AdsterraBanner />
       </div>
 
-      {/* Featured Tools */}
-      <section className="container py-16">
-        <h2 className="text-3xl font-bold text-center mb-2">Featured AI Tools</h2>
-        <p className="text-center text-muted-foreground mb-10">Our most popular free AI content generators</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {featured.map((t) => (
-            <ToolCard key={t.id} tool={t} />
-          ))}
-        </div>
-      </section>
-
-      {/* Ad #2: 300x250 after featured tools */}
-      <AdsterraBanner />
-
-      {/* Category Sections with Native Ad inserted in the middle */}
-      {allCategories.map((cat, index) => {
-        const catTools = getToolsByCategory(cat.id);
-        if (catTools.length === 0) return null;
-        const midPoint = Math.floor(allCategories.length / 2);
-        return (
-          <div key={cat.id}>
-            <section className="container py-10">
-              <h2 className="text-2xl font-bold mb-6">
-                {cat.icon} {cat.name}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {catTools.map((t) => (
-                  <ToolCard key={t.id} tool={t} />
-                ))}
-              </div>
-            </section>
-            {/* Ad #3: Native ad in the middle of categories */}
-            {index === midPoint && <AdsterraNative />}
-          </div>
-        );
-      })}
+      {/* Category Sections with ads after every 2 sections (max 3 ads total) */}
+      {(() => {
+        const validCats = allCategories.filter(cat => getToolsByCategory(cat.id).length > 0);
+        let adCount = 1; // already placed 1 ad above
+        return validCats.map((cat, index) => {
+          const catTools = getToolsByCategory(cat.id);
+          const showAd = (index + 1) % 2 === 0 && adCount < 3;
+          if (showAd) adCount++;
+          return (
+            <div key={cat.id}>
+              <section className="container py-10">
+                <h2 className="text-2xl font-bold mb-6">
+                  {cat.icon} {cat.name}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {catTools.map((t) => (
+                    <ToolCard key={t.id} tool={t} />
+                  ))}
+                </div>
+              </section>
+              {showAd && (index < validCats.length - 2 ? <AdsterraNative /> : <AdsterraBanner />)}
+            </div>
+          );
+        });
+      })()}
 
       {/* CTA */}
       <section className="bg-primary text-primary-foreground py-16">
