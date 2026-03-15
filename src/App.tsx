@@ -41,7 +41,7 @@ const App = () => (
           </Routes>
         </main>
         <SiteFooter />
-        <AdPlaceholder type="sticky-mobile" />
+        <StickyMobileAd />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
