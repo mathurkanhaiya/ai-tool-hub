@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
+import AdsterraBanner728 from "@/components/AdsterraBanner728";
 import AdsterraBanner from "@/components/AdsterraBanner";
-import MobileAdsterraBanner from "@/components/MobileAdsterraBanner";
+import AdsterraNative from "@/components/AdsterraNative";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
@@ -20,6 +20,7 @@ const HomePage = () => {
   }, [search]);
 
   const featured = tools.slice(0, 6);
+  const allCategories = categories;
 
   return (
     <>
@@ -76,7 +77,11 @@ const HomePage = () => {
         </div>
       </section>
 
-      <AdsterraBanner />
+      {/* Ad #1: 728x90 below hero (desktop) / 300x250 on mobile */}
+      <AdsterraBanner728 />
+      <div className="md:hidden">
+        <AdsterraBanner />
+      </div>
 
       {/* Featured Tools */}
       <section className="container py-16">
@@ -89,26 +94,31 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Category Sections */}
-      {categories.map((cat) => {
+      {/* Ad #2: 300x250 after featured tools */}
+      <AdsterraBanner />
+
+      {/* Category Sections with Native Ad inserted in the middle */}
+      {allCategories.map((cat, index) => {
         const catTools = getToolsByCategory(cat.id);
         if (catTools.length === 0) return null;
+        const midPoint = Math.floor(allCategories.length / 2);
         return (
-          <section key={cat.id} className="container py-10">
-            <h2 className="text-2xl font-bold mb-6">
-              {cat.icon} {cat.name}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {catTools.map((t) => (
-                <ToolCard key={t.id} tool={t} />
-              ))}
-            </div>
-            <AdPlaceholder type="in-content" />
-          </section>
+          <div key={cat.id}>
+            <section className="container py-10">
+              <h2 className="text-2xl font-bold mb-6">
+                {cat.icon} {cat.name}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {catTools.map((t) => (
+                  <ToolCard key={t.id} tool={t} />
+                ))}
+              </div>
+            </section>
+            {/* Ad #3: Native ad in the middle of categories */}
+            {index === midPoint && <AdsterraNative />}
+          </div>
         );
       })}
-
-      <AdsterraBanner />
 
       {/* CTA */}
       <section className="bg-primary text-primary-foreground py-16">
@@ -120,8 +130,6 @@ const HomePage = () => {
           </Link>
         </div>
       </section>
-
-      <MobileAdsterraBanner />
     </>
   );
 };
