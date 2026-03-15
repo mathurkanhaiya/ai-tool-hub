@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import SEOHead from "@/components/SEOHead";
 
@@ -9,20 +9,22 @@ const ContactPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    emailjs.sendForm(
-      "service_4frz95f",
-      "template_mkvb9y8",
-      form.current!,
-      "Mc6nYv8pUSI_9LMAs"
-    ).then(
-      () => {
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "service_4frz95f",
+        "template_mkvb9y8",
+        form.current,
+        "Mc6nYv8pUSI_9LMAs"
+      )
+      .then(() => {
         setSubmitted(true);
-      },
-      (error) => {
-        alert("Failed to send message");
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    );
+        alert("Failed to send message");
+      });
   };
 
   return (
