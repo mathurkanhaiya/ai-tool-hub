@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import SEOHead from "@/components/SEOHead";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const form = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +22,11 @@ const ContactPage = () => {
       )
       .then(() => {
         setSubmitted(true);
+
+        // Redirect to home after 3 seconds
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +53,7 @@ const ContactPage = () => {
             <div className="text-4xl mb-4">✅</div>
             <h2 className="text-xl font-bold mb-2">Message Sent!</h2>
             <p className="text-muted-foreground">
-              Thank you for reaching out. We'll get back to you soon.
+              Thank you for reaching out. Redirecting to homepage...
             </p>
           </div>
         ) : (
@@ -61,7 +68,7 @@ const ContactPage = () => {
                 required
                 name="user_name"
                 type="text"
-                className="w-full border rounded-lg px-4 py-2.5 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full border rounded-lg px-4 py-2.5 bg-background"
                 placeholder="Your name"
               />
             </div>
@@ -72,7 +79,7 @@ const ContactPage = () => {
                 required
                 name="user_email"
                 type="email"
-                className="w-full border rounded-lg px-4 py-2.5 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full border rounded-lg px-4 py-2.5 bg-background"
                 placeholder="your@email.com"
               />
             </div>
@@ -83,14 +90,14 @@ const ContactPage = () => {
                 required
                 name="message"
                 rows={5}
-                className="w-full border rounded-lg px-4 py-2.5 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                className="w-full border rounded-lg px-4 py-2.5 bg-background resize-none"
                 placeholder="Your message..."
               />
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
+              className="w-full px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90"
             >
               Send Message
             </button>
