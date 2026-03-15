@@ -62,15 +62,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.9",
     "zod": "^3.25.76"
-    {
-  "name": "free-ai-tools-hub",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1"
-  }
-}
+    "@emailjs/browser": "^4.4.1"}
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
