@@ -45,7 +45,7 @@ const HomePage = () => {
             <span className="text-gradient">Creators & Marketers</span>
           </h1>
           <p className="text-lg md:text-xl text-header-foreground/60 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Generate YouTube titles, Instagram captions, blog ideas, hashtags and more — all powered by AI. Trusted by 50,000+ creators worldwide.
+            Generate YouTube titles, Instagram captions, blog ideas, hashtags and more — all powered by AI. Trusted by 500+ creators worldwide.
           </p>
 
           {/* Search */}
