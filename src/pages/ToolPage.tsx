@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Copy, Check, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
+
 import { getToolById, getRelatedTools } from "@/data/tools";
 
 const ToolPage = () => {
