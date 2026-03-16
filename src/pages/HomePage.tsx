@@ -104,8 +104,6 @@ const HomePage = () => {
                 ))}
               </div>
             </section>
-            {/* Ad #3: Native ad in the middle of categories */}
-            {index === midPoint && <AdsterraNative />}
           </div>
         );
       })}
