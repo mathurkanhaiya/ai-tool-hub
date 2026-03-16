@@ -74,11 +74,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Ad #1: 728x90 below hero (desktop) / 300x250 on mobile */}
-      <AdsterraBanner728 />
-      <div className="md:hidden">
-        <AdsterraBanner />
-      </div>
 
       {/* Featured Tools */}
       <section className="container py-16">
