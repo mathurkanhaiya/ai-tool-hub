@@ -72,7 +72,7 @@ const ToolPage = () => {
           <span className="text-foreground">{tool.name}</span>
         </nav>
 
-        <AdPlaceholder type="banner" />
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 mt-8">
           <div>
