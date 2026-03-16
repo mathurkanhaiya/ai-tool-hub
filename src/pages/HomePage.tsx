@@ -86,8 +86,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Ad #2: 300x250 after featured tools */}
-      <AdsterraBanner />
 
       {/* Category Sections with Native Ad inserted in the middle */}
       {allCategories.map((cat, index) => {
