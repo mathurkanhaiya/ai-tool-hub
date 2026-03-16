@@ -176,7 +176,7 @@ const BlogPostPage = () => {
             return <p key={i} className="text-muted-foreground leading-relaxed">{block}</p>;
           })}
         </div>
-        <AdPlaceholder type="in-content" />
+        
       </article>
     </>
   );

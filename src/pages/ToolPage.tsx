@@ -158,8 +158,6 @@ const ToolPage = () => {
 
           {/* Sidebar */}
           <aside className="hidden lg:block space-y-6">
-            <AdPlaceholder type="sidebar" />
-            <AdPlaceholder type="sidebar" />
           </aside>
         </div>
       </div>
