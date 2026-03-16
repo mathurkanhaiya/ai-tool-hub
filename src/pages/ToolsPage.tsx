@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
+
 import { tools, categories } from "@/data/tools";
 
 const ToolsPage = () => {
