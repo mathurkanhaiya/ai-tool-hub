@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Copy, Check, ChevronDown } from "lucide-react";
+import { Copy, Check, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-
 import { getToolById, getRelatedTools } from "@/data/tools";
 
 const ToolPage = () => {
@@ -36,7 +35,6 @@ const ToolPage = () => {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // JSON-LD schema
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -63,102 +61,103 @@ const ToolPage = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <div className="container py-12">
-        <nav className="text-sm text-muted-foreground mb-6">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          {" / "}
-          <Link to="/tools" className="hover:text-foreground">Tools</Link>
-          {" / "}
-          <span className="text-foreground">{tool.name}</span>
+      <div className="container py-10 md:py-14">
+        {/* Breadcrumb */}
+        <nav className="text-sm text-muted-foreground mb-8 flex items-center gap-1.5">
+          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+          <span>/</span>
+          <Link to="/tools" className="hover:text-foreground transition-colors">Tools</Link>
+          <span>/</span>
+          <span className="text-foreground font-medium">{tool.name}</span>
         </nav>
 
-        
-
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 mt-8">
-          <div>
-            <div className="text-5xl mb-4">{tool.icon}</div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">{tool.name}</h1>
-            <p className="text-muted-foreground text-lg mb-8">{tool.description}</p>
-
-            {/* Input */}
-            <div className="bg-card border rounded-lg p-6 mb-8">
-              <label className="block font-semibold mb-2">{tool.inputLabel}</label>
-              <textarea
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder={tool.inputPlaceholder}
-                rows={3}
-                className="w-full border rounded-lg px-4 py-3 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-              />
-              <button
-                onClick={handleGenerate}
-                className="mt-4 w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Generate ✨
-              </button>
-            </div>
-
-            {/* Results */}
-            {results.length > 0 && (
-              <div className="space-y-4 mb-8">
-                <h2 className="text-xl font-bold">Generated Results</h2>
-                {results.map((r, i) => (
-                  <div
-                    key={i}
-                    className="bg-card border rounded-lg p-4 animate-fade-in"
-                    style={{ animationDelay: `${i * 0.1}s` }}
-                  >
-                    <pre className="whitespace-pre-wrap text-sm text-card-foreground font-sans">{r}</pre>
-                    <button
-                      onClick={() => handleCopy(r, i)}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                    >
-                      {copied === i ? <><Check className="h-4 w-4" /> Copied!</> : <><Copy className="h-4 w-4" /> Copy</>}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            
-
-            {/* FAQ */}
-            {tool.faqs.length > 0 && (
-              <div className="mt-12">
-                <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-                <div className="space-y-3">
-                  {tool.faqs.map((faq, i) => (
-                    <div key={i} className="border rounded-lg">
-                      <button
-                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                        className="w-full flex items-center justify-between p-4 text-left font-medium"
-                      >
-                        <h3 className="text-sm font-semibold">{faq.q}</h3>
-                        <ChevronDown className={`h-4 w-4 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
-                      </button>
-                      {openFaq === i && (
-                        <div className="px-4 pb-4 text-sm text-muted-foreground">{faq.a}</div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Related Tools */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Related Tools</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {related.map((t) => (
-                  <ToolCard key={t.id} tool={t} />
-                ))}
-              </div>
+        <div className="max-w-3xl">
+          {/* Header */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="text-4xl p-3 bg-secondary rounded-xl">{tool.icon}</div>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">{tool.name}</h1>
+              <p className="text-muted-foreground">{tool.description}</p>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <aside className="hidden lg:block space-y-6">
-          </aside>
+          {/* Input */}
+          <div className="bg-card border rounded-xl p-6 mb-8 shadow-sm">
+            <label className="block font-semibold mb-2 text-sm">{tool.inputLabel}</label>
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={tool.inputPlaceholder}
+              rows={3}
+              className="w-full border rounded-xl px-4 py-3 bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+            />
+            <button
+              onClick={handleGenerate}
+              className="mt-4 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-md shadow-primary/20"
+            >
+              <Sparkles className="h-4 w-4" /> Generate
+            </button>
+          </div>
+
+          {/* Results */}
+          {results.length > 0 && (
+            <div className="space-y-4 mb-10">
+              <h2 className="text-lg font-bold">Generated Results</h2>
+              {results.map((r, i) => (
+                <div
+                  key={i}
+                  className="bg-card border rounded-xl p-5 animate-fade-in"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  <pre className="whitespace-pre-wrap text-sm text-card-foreground font-sans leading-relaxed">{r}</pre>
+                  <button
+                    onClick={() => handleCopy(r, i)}
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                  >
+                    {copied === i ? <><Check className="h-4 w-4" /> Copied!</> : <><Copy className="h-4 w-4" /> Copy</>}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* FAQ */}
+          {tool.faqs.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-xl font-bold mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-3">
+                {tool.faqs.map((faq, i) => (
+                  <div key={i} className="border rounded-xl bg-card overflow-hidden">
+                    <button
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between p-4 text-left"
+                    >
+                      <h3 className="text-sm font-semibold">{faq.q}</h3>
+                      <ChevronDown className={`h-4 w-4 text-muted-foreground transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                    </button>
+                    {openFaq === i && (
+                      <div className="px-4 pb-4 text-sm text-muted-foreground leading-relaxed">{faq.a}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Related Tools */}
+          <div className="mt-14">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold">Related Tools</h2>
+              <Link to="/tools" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+                View all <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {related.map((t) => (
+                <ToolCard key={t.id} tool={t} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

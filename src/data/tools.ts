@@ -21,7 +21,6 @@ const categories = [
 
 export { categories };
 
-// Helper generators
 const shuffleAndPick = (arr: string[], count: number) => {
   const shuffled = [...arr].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
@@ -31,6 +30,7 @@ const templates = (patterns: string[], input: string): string[] =>
   patterns.map((p) => p.replace(/\{input\}/g, input)).sort(() => Math.random() - 0.5);
 
 export const tools: Tool[] = [
+  // ═══════════════════ YOUTUBE TOOLS ═══════════════════
   {
     id: "youtube-title-generator",
     name: "YouTube Title Generator",
@@ -99,25 +99,60 @@ export const tools: Tool[] = [
     generate: (input) => {
       const words = input.toLowerCase().split(/\s+/);
       const baseTags = [
-        input,
-        `${input} tutorial`,
-        `${input} 2025`,
-        `how to ${input}`,
-        `${input} for beginners`,
-        `${input} tips`,
-        `${input} guide`,
-        `best ${input}`,
-        `${input} tricks`,
-        `${input} explained`,
-        `learn ${input}`,
-        `${input} step by step`,
-        ...words,
-        `${words[0]} tips`,
-        `${words[0]} tutorial`,
+        input, `${input} tutorial`, `${input} 2025`, `how to ${input}`,
+        `${input} for beginners`, `${input} tips`, `${input} guide`,
+        `best ${input}`, `${input} tricks`, `${input} explained`,
+        `learn ${input}`, `${input} step by step`, ...words,
+        `${words[0]} tips`, `${words[0]} tutorial`,
       ];
       return [baseTags.join(", ")];
     },
   },
+  {
+    id: "youtube-script-generator",
+    name: "YouTube Script Generator",
+    description: "Generate professional video scripts with hooks, body, and CTAs. Save hours of writing time.",
+    metaDescription: "Free YouTube Script Generator - Create engaging video scripts with hooks, body content, and calls to action. Perfect for YouTubers.",
+    category: "youtube",
+    icon: "🎙️",
+    inputLabel: "What is your video about?",
+    inputPlaceholder: "e.g., 5 productivity hacks for remote workers",
+    faqs: [
+      { q: "How long should a YouTube script be?", a: "For a 10-minute video, aim for 1,500-2,000 words. A good rule of thumb is 150 words per minute." },
+      { q: "How do I write a good hook?", a: "Start with a bold claim, question, or surprising fact in the first 5-10 seconds to grab attention." },
+    ],
+    generate: (input) => [
+      `🎬 HOOK (0:00-0:15)\n"If you've been struggling with ${input}, this video is going to change everything. I'm about to share the exact strategies that top performers use — and most people have no idea about number 3."\n\n📋 INTRO (0:15-1:00)\n"Hey everyone, welcome back to the channel. Today we're diving deep into ${input}. By the end of this video, you'll have a complete roadmap. Make sure to stick around until the end because I've got a bonus tip that alone is worth watching.\n\nBefore we start, hit that subscribe button — over 70% of my viewers aren't subscribed yet!"\n\n📌 MAIN CONTENT\n\nPoint 1: [Expand on first aspect of ${input}]\nPoint 2: [Add data or example]\nPoint 3: [Share personal experience]\nPoint 4: [Address common misconception]\nPoint 5: [Advanced strategy]\n\n🎯 CTA (End)\n"If you found this helpful, smash that like button and drop a comment below — what's your biggest challenge with ${input}? I read every single comment. See you in the next one!"`,
+      `📝 SHORT-FORM SCRIPT (60 seconds)\n\n[HOOK - 3 sec]\n"Stop scrolling — this ${input} tip will blow your mind."\n\n[CONTEXT - 10 sec]\n"Most people get ${input} completely wrong. Here's what actually works..."\n\n[VALUE - 35 sec]\n"Step 1: [Key insight about ${input}]\nStep 2: [Practical action]\nStep 3: [Result they can expect]"\n\n[CTA - 10 sec]\n"Follow for more ${input} tips. Save this for later!"`,
+    ],
+  },
+  {
+    id: "youtube-channel-name-generator",
+    name: "YouTube Channel Name Generator",
+    description: "Find the perfect YouTube channel name that's memorable, brandable, and available.",
+    metaDescription: "Free YouTube Channel Name Generator - Create unique, memorable channel names for YouTube. Find brandable names instantly.",
+    category: "youtube",
+    icon: "📺",
+    inputLabel: "What is your channel about?",
+    inputPlaceholder: "e.g., tech reviews and tutorials",
+    faqs: [
+      { q: "What makes a good YouTube channel name?", a: "Keep it short, memorable, easy to spell, and relevant to your niche. Avoid numbers and special characters." },
+    ],
+    generate: (input) => {
+      const words = input.split(/\s+/).filter(w => w.length > 2);
+      const prefixes = ["The", "Daily", "Simply", "Ultra", "Epic", "Pro", "Next", "True", "Real", "Top"];
+      const suffixes = ["Hub", "Zone", "Academy", "Lab", "Studio", "Central", "HQ", "Nation", "World", "Insider"];
+      const results: string[] = [];
+      words.forEach(w => {
+        const cap = w.charAt(0).toUpperCase() + w.slice(1);
+        prefixes.forEach(p => results.push(`${p} ${cap}`));
+        suffixes.forEach(s => results.push(`${cap} ${s}`));
+      });
+      return shuffleAndPick(results, 12);
+    },
+  },
+
+  // ═══════════════════ SOCIAL MEDIA TOOLS ═══════════════════
   {
     id: "instagram-caption-generator",
     name: "Instagram Caption Generator",
@@ -158,9 +193,9 @@ export const tools: Tool[] = [
     generate: (input) =>
       templates(
         [
-          `Wait for the {input} part 😱 #fyp #viral #{input.replace(/\s+/g, "")}`,
+          `Wait for the {input} part 😱 #fyp #viral #{input.replace(/\\s+/g, "")}`,
           `POV: when {input} hits different 🔥 #relatable #fyp`,
-          `Day in my life: {input} edition ✨ #dayinmylife #{input.replace(/\s+/g, "")}`,
+          `Day in my life: {input} edition ✨ #dayinmylife #{input.replace(/\\s+/g, "")}`,
           `The {input} hack nobody talks about 🤯 #lifehack #fyp`,
           `Replying to @comment about {input} 👀 #storytime #fyp`,
           `{input} but make it aesthetic ✨ #aesthetic #trending`,
@@ -169,6 +204,122 @@ export const tools: Tool[] = [
         input
       ),
   },
+  {
+    id: "hashtag-generator",
+    name: "Hashtag Generator",
+    description: "Generate relevant hashtags for Instagram, Twitter, TikTok, and other social media platforms.",
+    metaDescription: "Free Hashtag Generator - Generate trending hashtags for Instagram, Twitter, and TikTok. Boost reach and engagement with relevant hashtags.",
+    category: "social-media",
+    icon: "#️⃣",
+    inputLabel: "Enter your topic or niche",
+    inputPlaceholder: "e.g., fitness motivation",
+    faqs: [
+      { q: "How many hashtags should I use?", a: "Instagram: 5-15, Twitter: 2-3, TikTok: 3-5. Quality over quantity - use relevant hashtags." },
+    ],
+    generate: (input) => {
+      const words = input.toLowerCase().split(/\s+/);
+      const joined = words.join("");
+      const tags = [
+        `#${joined}`, `#${words[0]}`, `#${joined}2025`, `#${words[0]}life`,
+        `#${joined}tips`, `#${words[0]}goals`, `#${joined}community`,
+        `#${words[0]}daily`, `#${joined}lover`, `#best${joined}`,
+        `#${joined}motivation`, `#${words[0]}vibes`, `#${joined}inspo`,
+        `#${words[0]}oftheday`, `#${joined}blog`, `#love${joined}`,
+        "#instagood", "#trending", "#viral", "#fyp", "#explore",
+      ];
+      return [tags.join(" ")];
+    },
+  },
+  {
+    id: "tweet-generator",
+    name: "Tweet Generator",
+    description: "Generate engaging tweets that get likes, retweets, and followers. Create viral Twitter content instantly.",
+    metaDescription: "Free Tweet Generator - Create engaging, viral tweets instantly. Generate Twitter content that boosts engagement and followers.",
+    category: "social-media",
+    icon: "🐦",
+    inputLabel: "What do you want to tweet about?",
+    inputPlaceholder: "e.g., productivity tips",
+    faqs: [
+      { q: "What makes a tweet go viral?", a: "Viral tweets are relatable, evoke emotion, provide value, or present a unique perspective. Timing also matters." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "Hot take: {input} is the most underrated skill of 2025.\n\nHere's why 🧵👇",
+          "5 {input} lessons I wish I learned sooner:\n\n1. Start before you're ready\n2. Consistency beats intensity\n3. Learn from failures\n4. Network matters\n5. Never stop learning\n\nBookmark this. 🔖",
+          "The best {input} advice I ever received:\n\n\"Don't wait for perfect conditions. Start now and improve along the way.\"\n\nRetweet if you agree ♻️",
+          "{input} cheat sheet:\n\n→ Set clear goals\n→ Track your progress\n→ Learn daily\n→ Share your journey\n→ Help others\n\nFollow for more tips 💪",
+          "People who master {input} have one thing in common:\n\nThey show up every single day.\n\nNo shortcuts. No hacks. Just consistency.\n\n❤️ if this resonates.",
+          "Unpopular opinion:\n\nYou don't need to be an expert in {input} to start sharing what you know.\n\nYour experience is valuable. Share it.",
+        ],
+        input
+      ),
+  },
+  {
+    id: "linkedin-post-generator",
+    name: "LinkedIn Post Generator",
+    description: "Create professional LinkedIn posts that build authority and drive engagement in your industry.",
+    metaDescription: "Free LinkedIn Post Generator - Create professional posts that build your personal brand and drive engagement on LinkedIn.",
+    category: "social-media",
+    icon: "💼",
+    inputLabel: "What topic do you want to post about?",
+    inputPlaceholder: "e.g., leadership lessons from my career",
+    faqs: [
+      { q: "What's the ideal LinkedIn post length?", a: "Posts between 1,200-1,600 characters tend to perform best. Use line breaks for readability." },
+      { q: "When should I post on LinkedIn?", a: "Tuesday through Thursday, 8-10 AM in your timezone, typically get the highest engagement." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "I spent 5 years learning about {input}.\n\nHere are 7 lessons that changed my career:\n\n1/ Start before you feel ready\n2/ Your network is your net worth\n3/ Consistency compounds\n4/ Failures are data points\n5/ Ask for help early\n6/ Document everything\n7/ Share your journey\n\nThe best time to start was yesterday.\nThe second best time is now.\n\n♻️ Repost if this resonates\n💬 What would you add to this list?",
+          "Unpopular opinion about {input}:\n\nMost people overcomplicate it.\n\nHere's what actually matters:\n\n→ Show up consistently\n→ Provide genuine value\n→ Build real relationships\n→ Stay curious\n→ Be patient\n\nSuccess in {input} isn't about hacks.\nIt's about habits.\n\nAgree or disagree? 👇",
+          "3 years ago, I knew nothing about {input}.\n\nToday, it's my strongest skill.\n\nHere's exactly what I did:\n\n📚 Month 1-3: Consumed everything\n🔨 Month 4-6: Built projects\n🤝 Month 7-9: Found mentors\n🚀 Month 10-12: Started teaching\n\nThe secret? I treated learning like a full-time job.\n\nWhat skill are you building right now?",
+        ],
+        input
+      ),
+  },
+  {
+    id: "instagram-bio-generator",
+    name: "Instagram Bio Generator",
+    description: "Create the perfect Instagram bio that converts profile visitors into followers.",
+    metaDescription: "Free Instagram Bio Generator - Create catchy, conversion-optimized Instagram bios. Stand out with a professional bio.",
+    category: "social-media",
+    icon: "👤",
+    inputLabel: "Describe yourself or your brand",
+    inputPlaceholder: "e.g., fitness coach helping busy moms",
+    faqs: [
+      { q: "How long can an Instagram bio be?", a: "Instagram bios are limited to 150 characters. Make every word count!" },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "✨ {input}\n📍 Worldwide\n🎯 Helping you level up\n💌 DM for collabs\n👇 Free resources below",
+          "🚀 {input}\n💡 Tips & insights daily\n🏆 Featured in top publications\n📩 Let's connect ↓",
+          "{input} 🌟\n📈 Growing together\n🎬 New content weekly\n🤝 Collabs → DM\n⬇️ Latest project",
+          "Hey, I'm into {input} 👋\n🔥 Real talk, real results\n📚 Free guide in bio link\n💬 Ask me anything",
+          "🎯 {input}\n✅ Proven strategies\n🌍 Global community\n📧 Business: hello@email.com\n👇 Start here",
+        ],
+        input
+      ),
+  },
+  {
+    id: "social-media-bio-generator",
+    name: "Social Media Bio Generator",
+    description: "Generate professional bios for any social platform — Twitter, TikTok, LinkedIn, and more.",
+    metaDescription: "Free Social Media Bio Generator - Create optimized bios for Twitter, TikTok, LinkedIn and more. Professional bios in seconds.",
+    category: "social-media",
+    icon: "🌐",
+    inputLabel: "Describe yourself or your brand",
+    inputPlaceholder: "e.g., freelance graphic designer",
+    faqs: [
+      { q: "Should bios be different for each platform?", a: "Yes! Each platform has different character limits and audiences. Tailor your bio accordingly." },
+    ],
+    generate: (input) => [
+      `🐦 Twitter Bio:\n${input} | Building in public 🚀 | Sharing lessons learned | DMs open\n\n💼 LinkedIn Headline:\n${input} → Helping brands grow through creative strategy | Open to opportunities\n\n🎵 TikTok Bio:\n${input} ✨ Daily tips & BTS 🎬 Link below 👇\n\n📌 Pinterest Bio:\nCurating the best of ${input} 📌 Boards for every occasion | Follow for daily inspo`,
+    ],
+  },
+
+  // ═══════════════════ WRITING TOOLS ═══════════════════
   {
     id: "blog-title-generator",
     name: "Blog Title Generator",
@@ -227,6 +378,108 @@ export const tools: Tool[] = [
         input
       ),
   },
+  {
+    id: "paragraph-rewriter",
+    name: "Paragraph Rewriter",
+    description: "Rewrite any paragraph to improve clarity, tone, and readability. Perfect for polishing your content.",
+    metaDescription: "Free Paragraph Rewriter - Rewrite and improve any paragraph instantly. Change tone, improve clarity, and enhance readability.",
+    category: "writing",
+    icon: "🔄",
+    inputLabel: "Paste the paragraph you want to rewrite",
+    inputPlaceholder: "e.g., Our company provides great services to customers worldwide...",
+    faqs: [
+      { q: "Will rewritten content be unique?", a: "Yes, the tool generates fresh variations while preserving the original meaning and key points." },
+    ],
+    generate: (input) => {
+      const sentences = input.split(/[.!?]+/).filter(s => s.trim());
+      const rewritten = sentences.map(s => {
+        const t = s.trim();
+        const variations = [
+          `Moreover, ${t.charAt(0).toLowerCase()}${t.slice(1)}`,
+          `It's worth noting that ${t.charAt(0).toLowerCase()}${t.slice(1)}`,
+          `Importantly, ${t.charAt(0).toLowerCase()}${t.slice(1)}`,
+        ];
+        return variations[Math.floor(Math.random() * variations.length)];
+      });
+      return [
+        `📝 Professional Version:\n${rewritten.join(". ")}.`,
+        `✨ Concise Version:\n${sentences.slice(0, Math.ceil(sentences.length / 2)).map(s => s.trim()).join(". ")}.`,
+        `🎯 Engaging Version:\nHere's the thing — ${sentences[0]?.trim().toLowerCase() || input}. ${sentences.slice(1).map(s => s.trim()).join(". ")}.`,
+      ];
+    },
+  },
+  {
+    id: "email-writer",
+    name: "Email Writer",
+    description: "Generate professional emails for any occasion — business, follow-ups, cold outreach, and more.",
+    metaDescription: "Free Email Writer - Generate professional emails instantly. Perfect for business communication, follow-ups, and cold outreach.",
+    category: "writing",
+    icon: "✉️",
+    inputLabel: "What kind of email do you need?",
+    inputPlaceholder: "e.g., follow-up after a job interview",
+    faqs: [
+      { q: "How do I write a professional email?", a: "Keep it concise, use a clear subject line, have a specific call to action, and proofread before sending." },
+    ],
+    generate: (input) => [
+      `Subject: Following Up — ${input}\n\nHi [Name],\n\nI hope this message finds you well. I wanted to follow up regarding ${input}.\n\nI really enjoyed our conversation and remain very enthusiastic about the opportunity. I believe my experience in this area would allow me to make a meaningful contribution.\n\nWould you be available for a brief call this week to discuss next steps?\n\nThank you for your time and consideration.\n\nBest regards,\n[Your Name]`,
+      `Subject: Quick Question About ${input}\n\nHi [Name],\n\nI'll keep this brief — I know your time is valuable.\n\nI'm reaching out about ${input}. I have a few ideas that could help, and I'd love to share them with you.\n\nWould 15 minutes work sometime this week?\n\nCheers,\n[Your Name]`,
+      `Subject: ${input} — Let's Connect\n\nDear [Name],\n\nI came across your work on ${input} and was truly impressed. I'm currently working on something similar and would love to exchange ideas.\n\nHere's what I can bring to the table:\n• Relevant experience in the field\n• Fresh perspectives and strategies\n• A collaborative mindset\n\nLet me know if you'd be open to a conversation.\n\nWarm regards,\n[Your Name]`,
+    ],
+  },
+  {
+    id: "story-idea-generator",
+    name: "Story Idea Generator",
+    description: "Generate creative story ideas, plot twists, and character concepts for writers and storytellers.",
+    metaDescription: "Free Story Idea Generator - Get creative story ideas, plot twists, and character concepts. Perfect for writers and storytellers.",
+    category: "writing",
+    icon: "📖",
+    inputLabel: "Enter a genre or theme",
+    inputPlaceholder: "e.g., sci-fi romance, mystery thriller",
+    faqs: [
+      { q: "How do I overcome writer's block?", a: "Try using random prompts, changing your environment, freewriting for 10 minutes, or combining two unrelated ideas." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "A world where {input} has been outlawed, and one person discovers why it was banned in the first place. The truth changes everything they thought they knew.",
+          "Two strangers meet at an airport during a storm. Both are running from something connected to {input}. They have 6 hours before the truth catches up.",
+          "In the year 2087, {input} is the most valuable commodity on Earth. A heist crew plans to steal the last remaining supply from a fortress in the clouds.",
+          "A therapist who specializes in {input}-related trauma begins receiving anonymous letters that reveal her own forgotten past.",
+          "What if {input} was actually a cover-up for something far more significant? A journalist discovers the connection — and someone doesn't want the story told.",
+          "Two timelines. One where {input} changed the world for better, one for worse. The protagonist exists in both simultaneously.",
+        ],
+        input
+      ),
+  },
+  {
+    id: "hook-generator",
+    name: "Content Hook Generator",
+    description: "Create irresistible opening hooks for articles, videos, and social posts that grab attention instantly.",
+    metaDescription: "Free Content Hook Generator - Create attention-grabbing opening lines for articles, videos, and social media posts.",
+    category: "writing",
+    icon: "🪝",
+    inputLabel: "What is your content about?",
+    inputPlaceholder: "e.g., why most diets fail",
+    faqs: [
+      { q: "What makes a good content hook?", a: "A great hook creates curiosity, challenges assumptions, uses specific numbers, or taps into emotions within the first sentence." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "Most people get {input} completely wrong. Here's what nobody tells you.",
+          "I wasted 3 years on {input} before I learned this one thing.",
+          "Stop everything you're doing about {input}. This changes the game.",
+          "97% of people fail at {input}. The other 3% all do this one thing differently.",
+          "What if everything you believed about {input} was a lie?",
+          "The {input} industry doesn't want you to know this.",
+          "In 30 seconds, I'm going to completely change how you think about {input}.",
+          "Here's a {input} truth bomb that might make you uncomfortable.",
+        ],
+        input
+      ),
+  },
+
+  // ═══════════════════ MARKETING TOOLS ═══════════════════
   {
     id: "startup-name-generator",
     name: "Startup Name Generator",
@@ -312,31 +565,6 @@ export const tools: Tool[] = [
       ),
   },
   {
-    id: "meta-description-generator",
-    name: "Meta Description Generator",
-    description: "Create SEO-optimized meta descriptions that improve click-through rates from Google search results.",
-    metaDescription: "Free Meta Description Generator - Create SEO-optimized meta descriptions for better Google rankings and higher CTR.",
-    category: "seo",
-    icon: "🔍",
-    inputLabel: "Enter your page topic/title",
-    inputPlaceholder: "e.g., Best running shoes for beginners",
-    faqs: [
-      { q: "How long should a meta description be?", a: "Keep it between 150-160 characters. Google truncates longer descriptions in search results." },
-      { q: "Do meta descriptions affect SEO?", a: "While not a direct ranking factor, good meta descriptions improve CTR which indirectly helps SEO." },
-    ],
-    generate: (input) =>
-      templates(
-        [
-          "Discover the best {input} in 2025. Expert-reviewed guide with tips, comparisons, and recommendations. Read now! ✓",
-          "Looking for {input}? Our comprehensive guide covers everything you need to know. Updated for 2025. Learn more →",
-          "{input} made simple. Get expert insights, actionable tips, and proven strategies. Start your journey today!",
-          "The ultimate resource for {input}. Trusted by 10,000+ readers. Free guide with step-by-step instructions.",
-          "Master {input} with our detailed guide. Expert tips, real examples, and practical advice. Updated weekly.",
-        ],
-        input
-      ),
-  },
-  {
     id: "email-subject-generator",
     name: "Email Subject Line Generator",
     description: "Generate email subject lines that boost open rates. Perfect for newsletters and marketing campaigns.",
@@ -366,32 +594,6 @@ export const tools: Tool[] = [
       ),
   },
   {
-    id: "hashtag-generator",
-    name: "Hashtag Generator",
-    description: "Generate relevant hashtags for Instagram, Twitter, TikTok, and other social media platforms.",
-    metaDescription: "Free Hashtag Generator - Generate trending hashtags for Instagram, Twitter, and TikTok. Boost reach and engagement with relevant hashtags.",
-    category: "social-media",
-    icon: "#️⃣",
-    inputLabel: "Enter your topic or niche",
-    inputPlaceholder: "e.g., fitness motivation",
-    faqs: [
-      { q: "How many hashtags should I use?", a: "Instagram: 5-15, Twitter: 2-3, TikTok: 3-5. Quality over quantity - use relevant hashtags." },
-    ],
-    generate: (input) => {
-      const words = input.toLowerCase().split(/\s+/);
-      const joined = words.join("");
-      const tags = [
-        `#${joined}`, `#${words[0]}`, `#${joined}2025`, `#${words[0]}life`,
-        `#${joined}tips`, `#${words[0]}goals`, `#${joined}community`,
-        `#${words[0]}daily`, `#${joined}lover`, `#best${joined}`,
-        `#${joined}motivation`, `#${words[0]}vibes`, `#${joined}inspo`,
-        `#${words[0]}oftheday`, `#${joined}blog`, `#love${joined}`,
-        "#instagood", "#trending", "#viral", "#fyp", "#explore",
-      ];
-      return [tags.join(" ")];
-    },
-  },
-  {
     id: "product-description-generator",
     name: "Product Description Generator",
     description: "Write compelling product descriptions that convert. Perfect for ecommerce stores and Amazon listings.",
@@ -414,29 +616,180 @@ export const tools: Tool[] = [
       ),
   },
   {
-    id: "tweet-generator",
-    name: "Tweet Generator",
-    description: "Generate engaging tweets that get likes, retweets, and followers. Create viral Twitter content instantly.",
-    metaDescription: "Free Tweet Generator - Create engaging, viral tweets instantly. Generate Twitter content that boosts engagement and followers.",
-    category: "social-media",
-    icon: "🐦",
-    inputLabel: "What do you want to tweet about?",
-    inputPlaceholder: "e.g., productivity tips",
+    id: "call-to-action-generator",
+    name: "Call-to-Action Generator",
+    description: "Generate high-converting CTAs for landing pages, emails, and ads that drive clicks and conversions.",
+    metaDescription: "Free Call-to-Action Generator - Create high-converting CTA buttons and text for websites, emails, and ads.",
+    category: "marketing",
+    icon: "🎯",
+    inputLabel: "What action do you want users to take?",
+    inputPlaceholder: "e.g., sign up for a free trial",
     faqs: [
-      { q: "What makes a tweet go viral?", a: "Viral tweets are relatable, evoke emotion, provide value, or present a unique perspective. Timing also matters." },
+      { q: "What makes a good CTA?", a: "Use action verbs, create urgency, be specific about the benefit, and keep it short (2-6 words)." },
     ],
     generate: (input) =>
       templates(
         [
-          "Hot take: {input} is the most underrated skill of 2025.\n\nHere's why 🧵👇",
-          "5 {input} lessons I wish I learned sooner:\n\n1. Start before you're ready\n2. Consistency beats intensity\n3. Learn from failures\n4. Network matters\n5. Never stop learning\n\nBookmark this. 🔖",
-          "The best {input} advice I ever received:\n\n\"Don't wait for perfect conditions. Start now and improve along the way.\"\n\nRetweet if you agree ♻️",
-          "{input} cheat sheet:\n\n→ Set clear goals\n→ Track your progress\n→ Learn daily\n→ Share your journey\n→ Help others\n\nFollow for more tips 💪",
-          "People who master {input} have one thing in common:\n\nThey show up every single day.\n\nNo shortcuts. No hacks. Just consistency.\n\n❤️ if this resonates.",
-          "Unpopular opinion:\n\nYou don't need to be an expert in {input} to start sharing what you know.\n\nYour experience is valuable. Share it.",
+          "🔘 Button: \"Start Your {input} Now\"\n📝 Supporting text: Join 50,000+ users who already made the switch.",
+          "🔘 Button: \"Get {input} Free\"\n📝 Supporting text: No credit card required. Cancel anytime.",
+          "🔘 Button: \"Claim Your {input}\"\n📝 Supporting text: Limited spots available — don't miss out!",
+          "🔘 Button: \"Yes, I Want {input}!\"\n📝 Supporting text: 30-day money-back guarantee. Zero risk.",
+          "🔘 Button: \"Try {input} Today\"\n📝 Supporting text: See results in 24 hours or your money back.",
+          "🔘 Button: \"Unlock {input}\"\n📝 Supporting text: Used by industry leaders worldwide.",
         ],
         input
       ),
+  },
+  {
+    id: "ad-copy-generator",
+    name: "Ad Copy Generator",
+    description: "Generate persuasive ad copy for Google Ads, Facebook Ads, and other advertising platforms.",
+    metaDescription: "Free Ad Copy Generator - Create high-converting ad copy for Google, Facebook, and Instagram ads. Boost your ROAS.",
+    category: "marketing",
+    icon: "📣",
+    inputLabel: "What are you advertising?",
+    inputPlaceholder: "e.g., online fitness coaching program",
+    faqs: [
+      { q: "How do I write effective ad copy?", a: "Lead with benefits, use social proof, create urgency, and have a clear call to action. Test multiple variations." },
+    ],
+    generate: (input) => [
+      `📱 Facebook/Instagram Ad:\n\nHeadline: Transform Your Life with ${input}\nPrimary Text: Tired of [pain point]? Our ${input} has helped 10,000+ people achieve real results. ✅ Proven methodology ✅ Expert support ✅ 30-day guarantee\nCTA: Sign Up Free →\nDescription: Join today and get 50% off your first month.`,
+      `🔍 Google Search Ad:\n\nHeadline 1: ${input} — Start Today\nHeadline 2: Trusted by 10,000+ Customers\nHeadline 3: Limited Time: 50% Off\nDescription 1: Discover the #1 rated ${input}. Free trial available. No credit card required. Get started in 2 minutes.\nDescription 2: ★★★★★ 4.9/5 rating. See why thousands choose us for ${input}. Sign up now →`,
+      `🎵 TikTok/Reels Ad Script:\n\n[Hook - 1 sec] "This ${input} hack changed everything for me"\n[Problem - 3 sec] "I used to struggle with [pain point]..."\n[Solution - 5 sec] "Then I discovered [your product/service]"\n[Result - 3 sec] "Now I [desired outcome] every single day"\n[CTA - 2 sec] "Link in bio — try it free today"`,
+    ],
+  },
+
+  // ═══════════════════ SEO TOOLS ═══════════════════
+  {
+    id: "meta-description-generator",
+    name: "Meta Description Generator",
+    description: "Create SEO-optimized meta descriptions that improve click-through rates from Google search results.",
+    metaDescription: "Free Meta Description Generator - Create SEO-optimized meta descriptions for better Google rankings and higher CTR.",
+    category: "seo",
+    icon: "🔍",
+    inputLabel: "Enter your page topic/title",
+    inputPlaceholder: "e.g., Best running shoes for beginners",
+    faqs: [
+      { q: "How long should a meta description be?", a: "Keep it between 150-160 characters. Google truncates longer descriptions in search results." },
+      { q: "Do meta descriptions affect SEO?", a: "While not a direct ranking factor, good meta descriptions improve CTR which indirectly helps SEO." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "Discover the best {input} in 2025. Expert-reviewed guide with tips, comparisons, and recommendations. Read now! ✓",
+          "Looking for {input}? Our comprehensive guide covers everything you need to know. Updated for 2025. Learn more →",
+          "{input} made simple. Get expert insights, actionable tips, and proven strategies. Start your journey today!",
+          "The ultimate resource for {input}. Trusted by 10,000+ readers. Free guide with step-by-step instructions.",
+          "Master {input} with our detailed guide. Expert tips, real examples, and practical advice. Updated weekly.",
+        ],
+        input
+      ),
+  },
+  {
+    id: "seo-keyword-generator",
+    name: "SEO Keyword Generator",
+    description: "Generate long-tail keyword ideas for your content strategy. Find low-competition keywords that drive traffic.",
+    metaDescription: "Free SEO Keyword Generator - Find long-tail keyword ideas for your niche. Discover low-competition keywords to drive organic traffic.",
+    category: "seo",
+    icon: "🗝️",
+    inputLabel: "Enter your seed keyword or topic",
+    inputPlaceholder: "e.g., vegan recipes",
+    faqs: [
+      { q: "What are long-tail keywords?", a: "Long-tail keywords are longer, more specific phrases (3-5 words) that have lower competition and higher conversion rates." },
+      { q: "How do I find keywords to target?", a: "Start with a seed keyword, then expand into questions, comparisons, and specific variations your audience searches for." },
+    ],
+    generate: (input) => {
+      const kws = [
+        `best ${input} for beginners`, `${input} tips and tricks`, `how to ${input} at home`,
+        `${input} guide 2025`, `${input} vs [alternative]`, `cheap ${input} options`,
+        `${input} near me`, `${input} for small business`, `${input} step by step`,
+        `top 10 ${input}`, `${input} mistakes to avoid`, `${input} benefits`,
+        `${input} tools free`, `${input} examples`, `what is ${input}`,
+        `${input} for dummies`, `${input} checklist`, `${input} tutorial`,
+        `affordable ${input}`, `${input} pros and cons`,
+      ];
+      return [`🗝️ Keyword Ideas for "${input}":\n\n${kws.map((k, i) => `${i + 1}. ${k}`).join("\n")}`];
+    },
+  },
+  {
+    id: "page-title-generator",
+    name: "SEO Page Title Generator",
+    description: "Generate SEO-optimized page titles (title tags) that rank higher on Google and improve click-through rates.",
+    metaDescription: "Free SEO Page Title Generator - Create optimized title tags for better Google rankings. Improve CTR with compelling page titles.",
+    category: "seo",
+    icon: "📑",
+    inputLabel: "Enter your page topic",
+    inputPlaceholder: "e.g., best project management software",
+    faqs: [
+      { q: "How long should a page title be?", a: "Keep it under 60 characters to prevent truncation in Google search results." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "{input} - Complete Guide [2025 Updated]",
+          "Best {input}: Expert Picks & Reviews (2025)",
+          "{input} — Tips, Tools & Strategies | Free Guide",
+          "Top 10 {input} You Need to Try in 2025",
+          "{input}: What You Need to Know Before Starting",
+          "The #1 Guide to {input} | Free Resource",
+          "{input} Explained Simply — Beginner's Guide",
+          "How to {input}: Step-by-Step (With Examples)",
+        ],
+        input
+      ),
+  },
+  {
+    id: "alt-text-generator",
+    name: "Image Alt Text Generator",
+    description: "Generate SEO-friendly alt text for images that improves accessibility and search rankings.",
+    metaDescription: "Free Image Alt Text Generator - Create descriptive, SEO-optimized alt text for your images. Improve accessibility and rankings.",
+    category: "seo",
+    icon: "🖼️",
+    inputLabel: "Describe what's in the image",
+    inputPlaceholder: "e.g., a woman working on a laptop in a coffee shop",
+    faqs: [
+      { q: "Why is alt text important?", a: "Alt text improves accessibility for screen readers, helps with image SEO, and provides context when images fail to load." },
+      { q: "How long should alt text be?", a: "Keep it under 125 characters. Be descriptive but concise. Don't stuff keywords." },
+    ],
+    generate: (input) =>
+      templates(
+        [
+          "{input} — high-quality photo for web and blog use",
+          "Descriptive image showing {input} in a professional setting",
+          "{input} — editorial-style photograph with natural lighting",
+          "Close-up view of {input} captured in high resolution",
+          "{input} — lifestyle image suitable for marketing materials",
+        ],
+        input
+      ),
+  },
+  {
+    id: "schema-markup-generator",
+    name: "FAQ Schema Generator",
+    description: "Generate FAQ schema markup (JSON-LD) for your website to get rich results on Google.",
+    metaDescription: "Free FAQ Schema Generator - Create JSON-LD FAQ schema markup for Google rich results. Boost your SEO with structured data.",
+    category: "seo",
+    icon: "🏗️",
+    inputLabel: "Enter FAQ question and answer (Q: ... A: ...)",
+    inputPlaceholder: "Q: What is SEO? A: SEO stands for Search Engine Optimization...",
+    faqs: [
+      { q: "What is FAQ schema?", a: "FAQ schema is structured data markup that helps search engines display your FAQs directly in search results as rich snippets." },
+    ],
+    generate: (input) => {
+      const parts = input.split(/A:|Answer:/i);
+      const question = (parts[0] || "").replace(/Q:|Question:/i, "").trim() || input;
+      const answer = (parts[1] || "").trim() || "Add your answer here.";
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [{
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        }],
+      };
+      return [`📋 FAQ Schema (JSON-LD):\n\nPaste this in your <head> tag:\n\n<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`];
+    },
   },
 ];
 

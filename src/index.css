@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
+    --background: 220 20% 97%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -18,10 +18,10 @@
     --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96%;
+    --secondary: 220 14% 96%;
     --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 96%;
+    --muted: 220 14% 96%;
     --muted-foreground: 215 16% 47%;
 
     --accent: 262 83% 58%;
@@ -30,13 +30,13 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 221 83% 53%;
 
     --radius: 0.75rem;
 
-    --header: 222 47% 8%;
+    --header: 222 47% 6%;
     --header-foreground: 210 40% 98%;
 
     --success: 142 71% 45%;
@@ -56,6 +56,8 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --glow: 221 83% 53%;
   }
 }
 
@@ -75,7 +77,33 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
-  .ad-placeholder {
-    @apply bg-ad border border-ad-border rounded-lg flex items-center justify-center text-muted-foreground text-sm;
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsla(var(--primary) / 0.03),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+  .card-shine:hover::before {
+    left: 125%;
+  }
+  .hero-glow {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      hsla(var(--glow) / 0.15) 0%,
+      transparent 70%
+    );
   }
 }
