@@ -4,9 +4,6 @@ import { Search } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
-import AdsterraBanner728 from "@/components/AdsterraBanner728";
-import AdsterraBanner from "@/components/AdsterraBanner";
-import AdsterraNative from "@/components/AdsterraNative";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
