@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import StickyMobileAd from "@/components/StickyMobileAd";
+
 import HomePage from "./pages/HomePage";
 import ToolsPage from "./pages/ToolsPage";
 import ToolPage from "./pages/ToolPage";
