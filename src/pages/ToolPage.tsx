@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Copy, Check, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
+
 import { getToolById, getRelatedTools } from "@/data/tools";
 
 const ToolPage = () => {
@@ -72,7 +72,7 @@ const ToolPage = () => {
           <span className="text-foreground">{tool.name}</span>
         </nav>
 
-        <AdPlaceholder type="banner" />
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 mt-8">
           <div>
@@ -120,7 +120,7 @@ const ToolPage = () => {
               </div>
             )}
 
-            <AdPlaceholder type="in-content" />
+            
 
             {/* FAQ */}
             {tool.faqs.length > 0 && (
@@ -158,8 +158,6 @@ const ToolPage = () => {
 
           {/* Sidebar */}
           <aside className="hidden lg:block space-y-6">
-            <AdPlaceholder type="sidebar" />
-            <AdPlaceholder type="sidebar" />
           </aside>
         </div>
       </div>

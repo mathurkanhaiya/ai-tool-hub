@@ -4,9 +4,6 @@ import { Search } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
-import AdsterraBanner728 from "@/components/AdsterraBanner728";
-import AdsterraBanner from "@/components/AdsterraBanner";
-import AdsterraNative from "@/components/AdsterraNative";
 
 const HomePage = () => {
   const [search, setSearch] = useState("");
@@ -77,11 +74,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Ad #1: 728x90 below hero (desktop) / 300x250 on mobile */}
-      <AdsterraBanner728 />
-      <div className="md:hidden">
-        <AdsterraBanner />
-      </div>
 
       {/* Featured Tools */}
       <section className="container py-16">
@@ -94,8 +86,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Ad #2: 300x250 after featured tools */}
-      <AdsterraBanner />
 
       {/* Category Sections with Native Ad inserted in the middle */}
       {allCategories.map((cat, index) => {
@@ -114,8 +104,6 @@ const HomePage = () => {
                 ))}
               </div>
             </section>
-            {/* Ad #3: Native ad in the middle of categories */}
-            {index === midPoint && <AdsterraNative />}
           </div>
         );
       })}

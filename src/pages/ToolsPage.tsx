@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import AdPlaceholder from "@/components/AdPlaceholder";
+
 import { tools, categories } from "@/data/tools";
 
 const ToolsPage = () => {
@@ -20,7 +20,7 @@ const ToolsPage = () => {
         <h1 className="text-4xl font-bold mb-2">All Free AI Tools</h1>
         <p className="text-muted-foreground mb-8">Browse our complete collection of AI-powered content generators</p>
 
-        <AdPlaceholder type="banner" />
+        
 
         <div className="flex flex-wrap gap-2 my-8">
           <button
