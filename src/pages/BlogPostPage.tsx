@@ -161,7 +161,7 @@ const BlogPostPage = () => {
       <article className="container py-12 max-w-3xl">
         <Link to="/blog" className="text-sm text-primary hover:underline mb-4 inline-block">← Back to Blog</Link>
         <h1 className="text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
-        <AdPlaceholder type="banner" />
+        
         <div className="mt-8 prose prose-lg max-w-none">
           {post.content.split("\n\n").map((block, i) => {
             if (block.startsWith("## ")) return <h2 key={i} className="text-xl font-bold mt-8 mb-3">{block.replace("## ", "")}</h2>;
