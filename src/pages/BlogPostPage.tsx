@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
-import AdPlaceholder from "@/components/AdPlaceholder";
+
 
 const posts: Record<string, { title: string; meta: string; content: string }> = {
   "viral-youtube-title-ideas": {
