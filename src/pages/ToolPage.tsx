@@ -120,7 +120,7 @@ const ToolPage = () => {
               </div>
             )}
 
-            <AdPlaceholder type="in-content" />
+            
 
             {/* FAQ */}
             {tool.faqs.length > 0 && (
