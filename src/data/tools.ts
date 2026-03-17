@@ -1,3 +1,5 @@
+import { additionalTools } from "./new-tools";
+
 export interface Tool {
   id: string;
   name: string;
@@ -17,6 +19,7 @@ const categories = [
   { id: "writing", name: "Writing Tools", icon: "✍️" },
   { id: "marketing", name: "Marketing Tools", icon: "📈" },
   { id: "seo", name: "SEO Tools", icon: "🔍" },
+  { id: "ai-productivity", name: "AI & Productivity Tools", icon: "🧠" },
 ];
 
 export { categories };
