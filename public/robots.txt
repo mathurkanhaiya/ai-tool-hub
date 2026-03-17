@@ -1,5 +1,28 @@
 User-agent: *
-Disallow: /search
-Allow:/
+Allow: /               # Explicitly allow root & most content
+Disallow: /admin/      # Backend / login areas
+Disallow: /wp-admin/   # WordPress example
+Disallow: /login/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /thank-you/
+Disallow: /search?     # Block internal search results (optional – be careful)
+Disallow: /*?sort=*    # Common parameter blocking examples
+Disallow: /*?page=*    # Pagination if not valuable
 
-Sitemap: https://www.viralaitools.xyz/sitemap.xml
+# AI/LLM crawlers – block if you don't want your content used for training
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# Always point to sitemap(s) – very important
+Sitemap: https://viralaitools.xyz/sitemap.xml
+# Sitemap: https://viralaitools.xyz/sitemap-tools.xml   # if you split sitemaps
