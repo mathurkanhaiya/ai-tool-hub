@@ -1,4 +1,5 @@
 User-agent: *
-Allow: /
+Disallow: /search
+Allow:/
 
-Sitemap: https://viralaitools.xyz/sitemap.xml
+Sitemap: https://www.viralaitools.xyz/sitemap.xml
