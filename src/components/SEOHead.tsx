@@ -4,63 +4,60 @@ interface SEOHeadProps {
   title: string;
   description: string;
   canonical?: string;
+  keywords?: string;
 }
 
-const SEOHead = ({ title, description, canonical }: SEOHeadProps) => {
-  useEffect(() => {
+const BASE_URL = "https://viralaitools.xyz";
+const LOGO_URL = "https://i.ibb.co/Y4GzrkLh/C921394-F-ABA8-4-C2-C-A4-C0-7321-E9-E46-BDC.png";
 
+const SEOHead = ({ title, description, canonical, keywords }: SEOHeadProps) => {
+  useEffect(() => {
     document.title = `${title} | Free AI Tools Hub`;
 
     const setMeta = (name: string, content: string, attr = "name") => {
-      let el = document.querySelector(
-        `meta[${attr}="${name}"]`
-      ) as HTMLMetaElement | null;
-
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
       if (!el) {
         el = document.createElement("meta");
         el.setAttribute(attr, name);
         document.head.appendChild(el);
       }
-
       el.content = content;
     };
 
     // Basic SEO
     setMeta("description", description);
+    if (keywords) setMeta("keywords", keywords);
+    setMeta("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
 
     // Open Graph
     setMeta("og:title", title, "property");
     setMeta("og:description", description, "property");
     setMeta("og:type", "website", "property");
+    setMeta("og:site_name", "Free AI Tools Hub", "property");
+    setMeta("og:image", LOGO_URL, "property");
+    setMeta("og:image:width", "512", "property");
+    setMeta("og:image:height", "512", "property");
 
-    // WhatsApp / Social preview image
-    setMeta(
-      "og:image",
-      "https://i.ibb.co/Y4GzrkLh/C921394-F-ABA8-4-C2-C-A4-C0-7321-E9-E46-BDC.png",
-      "property"
-    );
+    // Twitter
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", title);
+    setMeta("twitter:description", description);
+    setMeta("twitter:image", LOGO_URL);
 
-    // Twitter preview
-    setMeta(
-      "twitter:image",
-      "https://i.ibb.co/Y4GzrkLh/C921394-F-ABA8-4-C2-C-A4-C0-7321-E9-E46-BDC.png"
-    );
-
-    if (canonical) {
-      let link = document.querySelector(
-        'link[rel="canonical"]'
-      ) as HTMLLinkElement | null;
-
-      if (!link) {
-        link = document.createElement("link");
-        link.rel = "canonical";
-        document.head.appendChild(link);
-      }
-
-      link.href = canonical;
+    // Canonical
+    const canonicalUrl = canonical || `${BASE_URL}${window.location.pathname}`;
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
     }
+    link.href = canonicalUrl;
 
-  }, [title, description, canonical]);
+    // Set og:url
+    setMeta("og:url", canonicalUrl, "property");
+
+  }, [title, description, canonical, keywords]);
 
   return null;
 };
