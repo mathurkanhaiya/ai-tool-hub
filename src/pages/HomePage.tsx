@@ -6,7 +6,7 @@ import ToolCard from "@/components/ToolCard";
 import { tools, categories, getToolsByCategory } from "@/data/tools";
 
 const stats = [
-  { icon: Sparkles, value: `${30}+`, label: "AI Tools" },
+  { icon: Sparkles, value: `${tools.length}+`, label: "AI Tools" },
   { icon: Users, value: "500+", label: "Monthly Users" },
   { icon: Zap, value: "100%", label: "Free Forever" },
   { icon: Shield, value: "0", label: "Signup Required" },

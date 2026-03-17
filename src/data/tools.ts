@@ -1,3 +1,5 @@
+import { additionalTools } from "./new-tools";
+
 export interface Tool {
   id: string;
   name: string;
@@ -17,6 +19,7 @@ const categories = [
   { id: "writing", name: "Writing Tools", icon: "✍️" },
   { id: "marketing", name: "Marketing Tools", icon: "📈" },
   { id: "seo", name: "SEO Tools", icon: "🔍" },
+  { id: "ai-productivity", name: "AI & Productivity Tools", icon: "🧠" },
 ];
 
 export { categories };
@@ -791,6 +794,7 @@ export const tools: Tool[] = [
       return [`📋 FAQ Schema (JSON-LD):\n\nPaste this in your <head> tag:\n\n<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`];
     },
   },
+  ...additionalTools,
 ];
 
 export const getToolsByCategory = (categoryId: string) =>
@@ -798,5 +802,12 @@ export const getToolsByCategory = (categoryId: string) =>
 
 export const getToolById = (id: string) => tools.find((t) => t.id === id);
 
-export const getRelatedTools = (currentId: string, count = 4) =>
-  tools.filter((t) => t.id !== currentId).sort(() => Math.random() - 0.5).slice(0, count);
+export const getRelatedTools = (currentId: string, count = 4) => {
+  const current = getToolById(currentId);
+  if (!current) return tools.slice(0, count);
+  // Prioritize same-category tools for better internal linking
+  const sameCategory = tools.filter((t) => t.id !== currentId && t.category === current.category);
+  const others = tools.filter((t) => t.id !== currentId && t.category !== current.category);
+  const combined = [...sameCategory.sort(() => Math.random() - 0.5), ...others.sort(() => Math.random() - 0.5)];
+  return combined.slice(0, count);
+};

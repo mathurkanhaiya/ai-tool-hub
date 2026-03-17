@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Copy, Check, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ToolCard from "@/components/ToolCard";
-import { getToolById, getRelatedTools } from "@/data/tools";
+import { getToolById, getRelatedTools, tools, categories } from "@/data/tools";
 
 const ToolPage = () => {
   const { toolId } = useParams<{ toolId: string }>();
@@ -22,7 +22,8 @@ const ToolPage = () => {
     );
   }
 
-  const related = getRelatedTools(tool.id);
+  const related = getRelatedTools(tool.id, 6);
+  const category = categories.find(c => c.id === tool.category);
 
   const handleGenerate = () => {
     if (!input.trim()) return;
@@ -35,14 +36,21 @@ const ToolPage = () => {
     setTimeout(() => setCopied(null), 2000);
   };
 
+  // Structured Data
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: tool.name,
     description: tool.metaDescription,
+    url: `https://viralaitools.xyz/tool/${tool.id}`,
     applicationCategory: "UtilityApplication",
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    provider: {
+      "@type": "Organization",
+      name: "Free AI Tools Hub",
+      url: "https://viralaitools.xyz",
+    },
   };
 
   const faqSchema = {
@@ -55,18 +63,53 @@ const ToolPage = () => {
     })),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://viralaitools.xyz/" },
+      { "@type": "ListItem", position: 2, name: "Tools", item: "https://viralaitools.xyz/tools" },
+      { "@type": "ListItem", position: 3, name: category?.name || "Tools", item: `https://viralaitools.xyz/tools#${tool.category}` },
+      { "@type": "ListItem", position: 4, name: tool.name, item: `https://viralaitools.xyz/tool/${tool.id}` },
+    ],
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `How to Use ${tool.name}`,
+    description: `Step-by-step guide to using the free ${tool.name} at Free AI Tools Hub.`,
+    step: [
+      { "@type": "HowToStep", name: "Enter your topic", text: `Type your topic or idea in the input field. ${tool.inputPlaceholder}` },
+      { "@type": "HowToStep", name: "Click Generate", text: "Click the Generate button to create AI-powered results instantly." },
+      { "@type": "HowToStep", name: "Copy and use", text: "Review the generated results and click Copy to use them anywhere." },
+    ],
+  };
+
+  // SEO keywords
+  const keywords = `${tool.name.toLowerCase()}, free ${tool.name.toLowerCase()}, ${tool.category.replace("-", " ")} generator, ai ${tool.category.replace("-", " ")} tool, ${tool.name.toLowerCase()} online free`;
+
   return (
     <>
-      <SEOHead title={tool.name} description={tool.metaDescription} />
+      <SEOHead
+        title={`Free ${tool.name} - Generate Instantly | Free AI Tools Hub`}
+        description={tool.metaDescription}
+        canonical={`https://viralaitools.xyz/tool/${tool.id}`}
+        keywords={keywords}
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
 
       <div className="container py-10 md:py-14">
         {/* Breadcrumb */}
-        <nav className="text-sm text-muted-foreground mb-8 flex items-center gap-1.5">
+        <nav className="text-sm text-muted-foreground mb-8 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
           <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
           <span>/</span>
           <Link to="/tools" className="hover:text-foreground transition-colors">Tools</Link>
+          <span>/</span>
+          <span className="hover:text-foreground transition-colors">{category?.name || "Tools"}</span>
           <span>/</span>
           <span className="text-foreground font-medium">{tool.name}</span>
         </nav>
@@ -76,9 +119,22 @@ const ToolPage = () => {
           <div className="flex items-start gap-4 mb-6">
             <div className="text-4xl p-3 bg-secondary rounded-xl">{tool.icon}</div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold mb-2">{tool.name}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">Free {tool.name}</h1>
               <p className="text-muted-foreground">{tool.description}</p>
             </div>
+          </div>
+
+          {/* How to Use Section — rich programmatic SEO content */}
+          <div className="bg-secondary/50 border rounded-xl p-6 mb-8">
+            <h2 className="text-lg font-bold mb-3">How to Use {tool.name}</h2>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
+              <li><strong>Enter your topic</strong> — Type your idea, keyword, or topic in the input field below. For example: "{tool.inputPlaceholder.replace("e.g., ", "")}"</li>
+              <li><strong>Click Generate</strong> — Our AI will instantly create multiple high-quality results tailored to your input.</li>
+              <li><strong>Copy & Use</strong> — Click the copy button on any result to use it immediately. No signup required!</li>
+            </ol>
+            <p className="text-sm text-muted-foreground mt-3">
+              This {tool.name.toLowerCase()} is 100% free with no registration needed. Use it as many times as you want — there are no limits.
+            </p>
           </div>
 
           {/* Input */}
@@ -121,10 +177,28 @@ const ToolPage = () => {
             </div>
           )}
 
+          {/* Why Use This Tool — programmatic SEO content */}
+          <div className="mt-12 mb-12">
+            <h2 className="text-xl font-bold mb-4">Why Use Our Free {tool.name}?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { title: "100% Free Forever", desc: `Our ${tool.name.toLowerCase()} is completely free with no hidden costs or premium tiers.` },
+                { title: "No Signup Required", desc: "Start generating content immediately — no email, no account, no friction." },
+                { title: "AI-Powered Quality", desc: `Get professional-quality ${tool.category.replace("-", " ")} content generated by advanced AI algorithms.` },
+                { title: "Unlimited Generations", desc: "Generate as many results as you need. There are no daily limits or usage caps." },
+              ].map((item, i) => (
+                <div key={i} className="bg-card border rounded-xl p-4">
+                  <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
+                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* FAQ */}
           {tool.faqs.length > 0 && (
             <div className="mt-12">
-              <h2 className="text-xl font-bold mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-xl font-bold mb-6">Frequently Asked Questions About {tool.name}</h2>
               <div className="space-y-3">
                 {tool.faqs.map((faq, i) => (
                   <div key={i} className="border rounded-xl bg-card overflow-hidden">
@@ -144,19 +218,49 @@ const ToolPage = () => {
             </div>
           )}
 
-          {/* Related Tools */}
-          <div className="mt-14">
+          {/* Internal Linking: Browse by Category */}
+          <div className="mt-14 mb-8">
+            <h2 className="text-lg font-bold mb-4">Browse AI Tools by Category</h2>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.id}
+                  to={`/tools`}
+                  className="px-3 py-1.5 text-xs font-medium bg-secondary text-secondary-foreground rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors"
+                >
+                  {cat.icon} {cat.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Related Tools — more internal links */}
+          <div className="mt-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold">Related Tools</h2>
+              <h2 className="text-xl font-bold">Related Free AI Tools</h2>
               <Link to="/tools" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-                View all <ArrowRight className="h-3.5 w-3.5" />
+                View all {tools.length} tools <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {related.map((t) => (
                 <ToolCard key={t.id} tool={t} />
               ))}
             </div>
+          </div>
+
+          {/* Bottom SEO content */}
+          <div className="mt-14 text-sm text-muted-foreground leading-relaxed">
+            <h2 className="text-lg font-bold text-foreground mb-3">About {tool.name}</h2>
+            <p className="mb-3">
+              The {tool.name} by Free AI Tools Hub is a free online tool designed to help creators, marketers, and businesses generate high-quality {tool.category.replace("-", " ")} content in seconds. Whether you're a YouTuber, social media manager, blogger, or entrepreneur, this tool saves you hours of brainstorming and writing.
+            </p>
+            <p className="mb-3">
+              Unlike other tools that require expensive subscriptions or complicated signups, our {tool.name.toLowerCase()} is completely free with unlimited usage. Simply enter your topic, click generate, and get instant results you can copy and use anywhere.
+            </p>
+            <p>
+              Looking for more tools? Check out our full collection of <Link to="/tools" className="text-primary hover:underline">{tools.length}+ free AI tools</Link> for content creation, SEO, marketing, and more.
+            </p>
           </div>
         </div>
       </div>
