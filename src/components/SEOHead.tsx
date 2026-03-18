@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { highCpmCountries } from "@/data/countries";
 
 interface SEOHeadProps {
   title: string;
@@ -56,6 +57,26 @@ const SEOHead = ({ title, description, canonical, keywords }: SEOHeadProps) => {
 
     // Set og:url
     setMeta("og:url", canonicalUrl, "property");
+
+    // Hreflang tags for high-CPM countries
+    // Remove old hreflang links
+    document.querySelectorAll('link[hreflang]').forEach((el) => el.remove());
+
+    // Add x-default
+    const xDefault = document.createElement("link");
+    xDefault.rel = "alternate";
+    xDefault.setAttribute("hreflang", "x-default");
+    xDefault.href = `${BASE_URL}${window.location.pathname}`;
+    document.head.appendChild(xDefault);
+
+    // Add country-specific hreflang
+    highCpmCountries.forEach((country) => {
+      const hreflangLink = document.createElement("link");
+      hreflangLink.rel = "alternate";
+      hreflangLink.setAttribute("hreflang", country.hreflang);
+      hreflangLink.href = `${BASE_URL}${window.location.pathname}`;
+      document.head.appendChild(hreflangLink);
+    });
 
   }, [title, description, canonical, keywords]);
 
