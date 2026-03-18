@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { tools } from "@/data/tools";
+import { highCpmCountries } from "@/data/countries";
 
 const SiteFooter = () => {
   const popularTools = tools.slice(0, 6);
