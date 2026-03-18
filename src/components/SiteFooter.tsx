@@ -46,6 +46,22 @@ const SiteFooter = () => {
           </ul>
         </div>
       </div>
+      {/* Country links for high-CPM geo targeting */}
+      <div className="container pb-8">
+        <h4 className="text-header-foreground font-semibold mb-3 text-sm uppercase tracking-wider">Free AI Tools by Country</h4>
+        <div className="flex flex-wrap gap-2">
+          {highCpmCountries.map((c) => (
+            <Link
+              key={c.code}
+              to={`/tools/${c.code}`}
+              className="text-xs px-2.5 py-1 rounded bg-header-foreground/10 hover:bg-header-foreground/20 transition-colors"
+            >
+              {c.flag} {c.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+      </div>
       <div className="border-t border-header-foreground/10 py-6 text-center text-xs text-header-foreground/40">
         © {new Date().getFullYear()} Free AI Tools Hub. All rights reserved.
       </div>
