@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import ContactPage from "./pages/ContactPage";
+import CountryToolsPage from "./pages/CountryToolsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

@@ -72,6 +72,62 @@ export const blogPosts = [
     category: "SEO",
     date: "February 28, 2025",
   },
+  {
+    slug: "best-ai-tools-for-youtubers-usa",
+    title: "Best Free AI Tools for YouTubers in the USA (2025)",
+    excerpt: "American YouTubers are using these free AI tools to generate viral titles, descriptions, and scripts. Here are the top picks for 2025.",
+    category: "YouTube",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "free-ai-marketing-tools-uk",
+    title: "15 Free AI Marketing Tools Every UK Marketer Needs in 2025",
+    excerpt: "British marketers share the free AI tools they use daily for content creation, SEO, email marketing, and social media management.",
+    category: "Marketing",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "ai-content-tools-for-australian-creators",
+    title: "Top Free AI Content Tools for Australian Creators",
+    excerpt: "Australian content creators are saving hours with these free AI generators. From Instagram captions to blog outlines — all free.",
+    category: "AI Tools",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "instagram-growth-tips-canada",
+    title: "Instagram Growth Tips for Canadian Creators in 2025",
+    excerpt: "Canadian Instagram creators reveal their best growth strategies using free AI tools for captions, hashtags, and bio optimization.",
+    category: "Social Media",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "seo-tips-for-german-bloggers",
+    title: "SEO Tips for German Bloggers: Rank Higher on Google.de",
+    excerpt: "Learn how German bloggers use free AI SEO tools to rank higher on Google. Meta descriptions, keywords, and content optimization.",
+    category: "SEO",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "youtube-growth-strategies-europe",
+    title: "YouTube Growth Strategies for European Creators (2025 Guide)",
+    excerpt: "European YouTubers in UK, Germany, Netherlands, and Scandinavia share their best strategies for channel growth using free AI tools.",
+    category: "YouTube",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "free-ai-tools-for-small-business-owners",
+    title: "20 Free AI Tools Every Small Business Owner Needs",
+    excerpt: "Save time and money with these 20 free AI tools for small business owners. From ad copy to email marketing — all free.",
+    category: "Marketing",
+    date: "March 18, 2025",
+  },
+  {
+    slug: "linkedin-content-strategy-2025",
+    title: "LinkedIn Content Strategy: How to Go Viral on LinkedIn in 2025",
+    excerpt: "Master LinkedIn with proven content strategies. Learn what post formats work, best posting times, and how to use AI tools for LinkedIn.",
+    category: "Social Media",
+    date: "March 18, 2025",
+  },
 ];
 
 const BlogPage = () => (
