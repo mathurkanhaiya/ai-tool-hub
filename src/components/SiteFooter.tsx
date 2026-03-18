@@ -61,7 +61,6 @@ const SiteFooter = () => {
           ))}
         </div>
       </div>
-      </div>
       <div className="border-t border-header-foreground/10 py-6 text-center text-xs text-header-foreground/40">
         © {new Date().getFullYear()} Free AI Tools Hub. All rights reserved.
       </div>
