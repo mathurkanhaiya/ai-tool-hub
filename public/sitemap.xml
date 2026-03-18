@@ -1,13 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+  http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>https://www.viralaitools.xyz/</loc>
-  <lastmod>2026-03-18T02:28:08+00:00</lastmod>
-</url>
+  <!-- Main Pages -->
+  <url><loc>https://viralaitools.xyz/</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/blog</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/about</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/contact</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/privacy-policy</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/terms</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+
+  <!-- Country Pages -->
+  <url><loc>https://viralaitools.xyz/tools/us</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/gb</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/au</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/ca</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/de</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/ch</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/no</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/dk</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/se</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/nl</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/at</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/be</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/fi</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/nz</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+  <url><loc>https://viralaitools.xyz/tools/ie</loc><lastmod>2026-03-18T00:00:00+00:00</lastmod></url>
+
+  <!-- YouTube Tools -->
+  <url><loc>https://viralaitools.xyz/tool/youtube-title-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-description-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-tag-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-script-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-channel-name-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-thumbnail-idea-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-intro-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-community-post-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-shorts-script-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-end-screen-cta-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/youtube-comment-reply-generator</loc></url>
+
+  <!-- Social Tools -->
+  <url><loc>https://viralaitools.xyz/tool/instagram-caption-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/tiktok-caption-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/hashtag-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/tweet-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/linkedin-post-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/instagram-bio-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/social-media-bio-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/facebook-post-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/pinterest-pin-description-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/twitter-thread-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/reddit-post-generator</loc></url>
+
+  <!-- Writing Tools -->
+  <url><loc>https://viralaitools.xyz/tool/blog-title-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/blog-idea-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/paragraph-rewriter</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/email-writer</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/story-idea-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/hook-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/article-outline-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/press-release-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/resume-summary-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/cover-letter-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/newsletter-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/speech-generator</loc></url>
+
+  <!-- Marketing Tools -->
+  <url><loc>https://viralaitools.xyz/tool/startup-name-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/brand-name-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/slogan-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/email-subject-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/product-description-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/call-to-action-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/ad-copy-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/google-ads-headline-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/landing-page-copy-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/value-proposition-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/testimonial-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/elevator-pitch-generator</loc></url>
+
+  <!-- SEO Tools -->
+  <url><loc>https://viralaitools.xyz/tool/meta-description-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/seo-keyword-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/page-title-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/alt-text-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/schema-markup-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/blog-post-seo-analyzer</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/internal-linking-suggestion-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/robots-txt-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/open-graph-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/xml-sitemap-generator</loc></url>
+
+  <!-- AI Tools -->
+  <url><loc>https://viralaitools.xyz/tool/ai-prompt-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/meeting-agenda-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/pros-cons-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/swot-analysis-generator</loc></url>
+  <url><loc>https://viralaitools.xyz/tool/business-plan-outline-generator</loc></url>
+
+  <!-- Blogs -->
+  <url><loc>https://viralaitools.xyz/blog/viral-youtube-title-ideas</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/instagram-caption-ideas</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/startup-name-ideas</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/blog-seo-tips</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/best-ai-tools-for-content-creators</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/how-to-grow-youtube-channel-fast</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/tiktok-marketing-guide-2025</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/email-marketing-tips-for-beginners</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/chatgpt-prompts-for-marketing</loc></url>
+  <url><loc>https://viralaitools.xyz/blog/how-to-write-meta-descriptions-that-rank</loc></url>
 
 </urlset>
